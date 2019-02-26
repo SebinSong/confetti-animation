@@ -1,28 +1,18 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <confetti-two></confetti-two>
   </div>
 </template>
-
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import ConfettiOne from './components/ConfettiOne'
+import ConfettiTwo from './components/ConfettiTwo'
 
 export default {
   name: 'app',
-  components: {
-    HelloWorld
-  }
+  components: { ConfettiOne, ConfettiTwo }
 }
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="scss">
+@import './assets/init.scss';
 </style>
