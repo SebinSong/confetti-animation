@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <confetti-two></confetti-two>
+    <confetti-one></confetti-one>
   </div>
 </template>
 <script>

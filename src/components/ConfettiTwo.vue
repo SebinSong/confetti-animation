@@ -7,16 +7,13 @@
       <defs>
         <rect id="bgrect" x="0" y="0" width="100%" height="100%" />
         <g class="confetti">
-          <g class="obj">
-            <path class="obj-path"
+          <g class="inner">
+            <path class="confetti-path"
                   fill="rgba(190,20,25,1)"
                   d="M10,-5 l-5,10 h-10 l5,-10z"
             />
           </g>
-          <path class="trace straight" />
-          <path class="trace curve" />
         </g>
-        <path class="trace" />
       </defs>
       <g id="newcoordinate">
       </g>
@@ -47,7 +44,8 @@ export default {
  
   },
   mounted(){
-    confettiAnimationSettings(this.$refs.svg);
+    console.log('el: ', this.$el);
+    confettiAnimationSettings.call(this, this.$refs.svg);
   }
 }
 </script>

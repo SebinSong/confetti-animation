@@ -9,8 +9,10 @@ export default function ({easeType, initValue, endValue, duration}) {
       };
 
     case 'QuadOut': 
-      const A = endValue / duration;
-      return t => A*(2*t - 1/duration*t*t) + initValue;
+      return t => {
+        const A = (endValue - initValue) / duration;
+        return A*(2*t - 1/duration*t*t) + initValue;
+      }
 
     case 'QuadInOut':
       return t => {
@@ -72,4 +74,4 @@ export default function ({easeType, initValue, endValue, duration}) {
       }
   }
 
-};
+}
