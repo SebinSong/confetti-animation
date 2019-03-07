@@ -1,5 +1,20 @@
-@import url('https://fonts.googleapis.com/css?family=Coiny');
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
+
+*, *:after, *:before {
+  padding: 0; margin: 0;
+  box-sizing: border-box;
+}
 
 *:not(i){
-  font-family: 'Coiny', courier;
+  font-family: 'Source Sans Pro', courier;
 }
+
+html, body {
+  width: 100vw; height: 100vh;
+}
+
+body {
+  position: fixed;
+  overflow: hidden;
+}
+

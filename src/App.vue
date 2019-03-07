@@ -1,16 +1,14 @@
 <template>
   <div id="app">
-    <confetti-two></confetti-two>
-    <confetti-one></confetti-one>
+    <confetti-animation></confetti-animation>
   </div>
 </template>
 <script>
-import ConfettiOne from './components/ConfettiOne'
-import ConfettiTwo from './components/ConfettiTwo'
+import ConfettiAnimation from './components/confetti-1/ConfettiAnimation'
 
 export default {
   name: 'app',
-  components: { ConfettiOne, ConfettiTwo }
+  components: { ConfettiAnimation }
 }
 </script>
 

@@ -68,7 +68,7 @@ export default function ({easeType, initValue, endValue, duration}) {
           initValue : (endValue - initValue) * Math.pow(2, 10 * (t/duration - 1)) + initValue;
       }
     
-    default: 
+    default: // 'Linear'
       return t => {
         return (endValue - initValue)*t/duration + initValue;
       }
