@@ -1,0 +1,49 @@
+@mixin fullScreen {
+  position: absolute;
+  top: 0; left: 0;
+  width: inherit; height: inherit; 
+}
+
+div#confetti-one {
+  @include fullScreen;
+}
+.bg-sky {
+  @include fullScreen;
+  background:
+  linear-gradient(to bottom,
+  rgba(#18959b,0.2) 0%, rgba(#57bcc1, 0.3) 57%,
+    rgba(#fff, 0.5) 99%);
+}
+
+svg {
+  @include fullScreen;
+  g.cone {
+    stroke: {
+      width: 2;
+      linejoin: round;
+      linecap: round;
+      // dasharray: 5,4;
+    }
+    opacity: 0.8;
+
+    &.cone-grey { stroke: #B6B5B8; }
+    &.cone-red { stroke: #F67280; }
+  }
+
+  g.confetti {
+    // stroke color defaults to black but will be set to 
+    // the new one as an inline style by script
+    stroke: #000 {
+      width: 3;
+      // dasharray: 4,5;
+      linecap: round;
+      linejoin: round;
+    }
+    fill: none;
+  }
+
+}
+
+
+
+

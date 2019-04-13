@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
+@import 'variables';
+
+*, *:after, *:before {
+  padding: 0; margin: 0;
+  box-sizing: border-box;
+}
+
+*:not(i){
+  font-family: 'Source Sans Pro', courier;
+  color: #363636;
+}
+
+html, body {
+  width: 100vw; height: 100vh;
+}
+
+body {
+  position: fixed;
+
+  .container {
+    position: relative;
+    width: 100vw; height: 100vh;
+  }
+
+  svg {
+    position: absolute;
+    left: 0; top: 0;
+    width: inherit; height: inherit;
+  }
+}
+
+button {
+  cursor: pointer;
+  border: none;
+
+  &:focus,
+  &:hover {
+    outline: none;
+    color: inherit;
+  }
+}

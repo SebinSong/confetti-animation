@@ -3,7 +3,8 @@
     <svg xmlns="http://www.w3.org/2000/svg"
          xmlns:xlink="http://www.w3.org/1999/xlink"
          version="1.1"
-         @mousemove.stop="svgMouseMoveHandler">
+         @mousemove.stop="svgMouseMoveHandler"
+    >
 
       <defs>
         <radialGradient id="grad1" cx="250" cy="250" r="50" fx="220" fy="220"
@@ -11,11 +12,6 @@
           <stop offset="0%" stop-color="rgba(180,20,25,1)" />
           <stop offset="80%" stop-color="rgba(35,200,25,1)" />
         </radialGradient>
-
-        <pattern id="pattern1" x="0" y="0" width="0.25" height="0.2" patternContentUnits="objectBoundingBox">
-          <circle cx="0.1" cy="0.1" r="0.1" fill="rgba(180,20,25,0.5)" />
-          <rect x="0" y="0" width="1" height="1" fill="rgba(0,0,0,0.1)" stroke="rgba(0,0,0,0.8)" stroke-width="0.01"/>
-        </pattern>
 
         <linearGradient id="lg1" gradientTransform="rotate(75)">
           <stop offset="0%" stop-color="rgba(190,20,25,0.8)" />
@@ -51,10 +47,6 @@
             ref="curve1"
       />
 
-      <ellipse cx="50%" cy="50%" rx="100" ry="40" 
-              fill="url(#pattern1)"
-      />
-
       <path ref="trailingPath" 
             id="trailingpath"
             fill="none" 
@@ -80,9 +72,10 @@
       </text>
 
       <text x="100" y="400"
-            font-size="30"
+            font-size="50"
+            font-family="courier"
             kerning="20"
-            textLength="200"
+            textLength="400"
             lengthAdjust="spacingAndGlyphs"
       >Jason 
        <tspan dx="-55" dy="20" font-weight="bold"
@@ -106,11 +99,119 @@
         <circle id="cir1" ref="cir1"
                 cx="400" cy="600" r="50" fill="rgba(185,20,25,0.7)"/>
       </g>
+
+      <filter id="flooder" x="0%" y="0%" width="100%" height="100%" result="FLOOD">
+        <feFlood flood-color="rgba(20,25,180)" flood-opacity="0.75"></feFlood>
+
+        <feMerge>
+          <feMergeNode in="FLOOD" />
+          <feMergeNode in="SourceGraphic" />
+        </feMerge>
+      </filter>
+      <filter id="ds" x="0%" y="0%" width="100%" height="100%">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="DROP" ></feGaussianBlur>
+        <feFlood flood-color="#bbb" result="FLOOD"></feFlood>
+        <feComposite in="FLOOD" in2="DROP" operator="in" result="SHADOW"></feComposite>
+        <feOffset in="SHADOW" dx="10" dy="10" result="DROPSHADOW"></feOffset>
+        <feMerge>
+          <feMergeNode in="DROPSHADOW"></feMergeNode>
+          <feMergeNode in="SourceGraphic"></feMergeNode>
+        </feMerge>
+      </filter>
+      <filter id="feMorph">
+        <feMorphology in="SourceGraphic" operator="dilate" radius="4" result="DILATE"></feMorphology>
+        <feFlood flood-color="#32DFEC" flood-opacity="0.95" result="PINK"></feFlood>
+        <feComposite in="PINK" in2="DILATE" operator="in" result="OUTLINE"></feComposite>
+
+        <feMerge>
+          <feMergeNode in="OUTLINE" />
+          <feMergeNode in="SourceGraphic" />
+        </feMerge>
+      </filter>
+      <filter id="feCarve">
+        <feMorphology in="SourceGraphic" operator="dilate" radius="4" result="DILATE"></feMorphology>
+        <feComposite in="DILATE" in2="SourceGraphic" operator="out" result="OUTLINE"></feComposite>
+      </filter>
+      <filter id="feDilate">
+        <feMorphology in="SourceGraphic" operator="dilate" radius="4" result="DILATE" />
+        <feComposite in="DILATE" in2="SourceGraphic" operator="out" result="OUTLINE" />
+      </filter>
+      <filter id="feErode">
+        <feMorphology in="SourceAlpha" operator="erode" radius="1" result="ERODE" />
+      </filter>
+      <filter id="feImage">
+        <feComponentTransfer>
+          <feFuncA type="table" tableValues="0 1" />
+          <feFuncR type="discrete" tableValues="0 0.25 0.5 0.75 1" />
+          <feFuncG type="discrete" tableValues="0 0.25 0.5 0.75 1" />
+          <feFuncB type="discrete" tableValues="0 0.25 0.5 0.75 1" />
+        </feComponentTransfer>
+      </filter>
+      <filter id="grayScale">
+        <feColorMatrix type="matrix" values=".33 .33 .33 0 0, .33 .33 .33 0 0, .33 .33 .33 0 0, 0 0 0 1 0"
+        ></feColorMatrix>
+        <!--feComponentTransfer color-interpolation-filters="sRGB">
+            <feFuncR type="table" tableValues=".996078431  .984313725"></feFuncR>
+            <feFuncG type="table" tableValues=".125490196  .941176471"></feFuncG>
+            <feFuncB type="table" tableValues=".552941176  .478431373"></feFuncB>
+        </feComponentTransfe-->
+        <feComponentTransfer color-interpolation-filters="sRGB">
+          <feFuncR type="gamma" exponent="1.5" amplitude="1.3" offset="0"></feFuncR>
+          <feFuncG type="gamma" exponent="1.5" amplitude="1.3" offset="0"></feFuncG>
+          <feFuncB type="gamma" exponent="1.5" amplitude="1.3" offset="0"></feFuncB>
+        </feComponentTransfer>
+      </filter>
+      <text x="400" y="500" fill="#E84A5F"
+            font-size="100" font-weight="bold"
+      >Example Text</text>
+
+      <filter id="haha">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="10" result="DROP"></feGaussianBlur>
+        <feFlood flood-color="#777" flood-opacity="0.7" result="DS-FLOOD"></feFlood>
+        <feComposite in="DS-FLOOD" in2="DROP" operator="in" result="DS-COMPOSITE"></feComposite>
+        <feOffset dx="15" dy="15" result="DS-OFFSET"></feOffset>
+
+        <feMorphology in="SourceGraphic" operator="erode" radius="8" result="DILATE" ></feMorphology>
+
+        <feMerge>
+          <feMergeNode in="DS-OFFSET" />
+          <feMergeNode in="DILATE" />
+        </feMerge>
+      </filter>
+      <filter id="matrix">
+        <feColorMatrix type="matrix"
+          values="
+          0 1 0 0 0
+          0 1 0 0 0
+          0 1 0 0 0
+          0 0 0 1 0
+          "
+        ></feColorMatrix>
+      </filter>
+      <filter id="gamma">
+        <feComponentTransfer color-interpolation-filters="sRGB" >
+          <feFuncR type="gamma" exponent="1.5" amplitude="1.3" offset="0" />
+          <feFuncG type="gamma" exponent="1.5" amplitude="1.3" offset="0" />
+          <feFuncB type="gamma" exponent="1.5" amplitude="1.3" offset="0" />
+        </feComponentTransfer>
+      </filter>
+
+      <image xlink:href="@/assets/img/pic1.jpg" x="600" y="300" width="300" height="500"
+             preserveAspectRatio="xMidYMid" opacity="1" filter="url(#gamma)" id="img1"/>
+
+      <filter id="texture">
+        <feImage xlink:href="#img1"></feImage>
+        <feColorMatrix type="saturate" values="0" result="IMAGE"></feColorMatrix>
+      </filter>
+      <rect x="600" y="50" width="300" height="300" fill="rgba(170,20,25,0.7)" stroke="#000" 
+            filter="url(#texture)"
+      />
     </svg>
 
-    <svg xmlns="http://www.w3.org/2000/svg"
+    <!--svg xmlns="http://www.w3.org/2000/svg"
          xmlns:xlink="http://www.w3.org/1999/xlink"
-         version="1.1">
+         version="1.1"
+    >
       <defs>
         <g data-name="circle"></g>
         <g data-name="confetti">
@@ -141,14 +242,16 @@
         />
 
         <g id="confetti-group"></g>
-    </svg>
+    </svg-->
     <p id="txt" ref="txtBoard"></p>
   </div>
 </template>
 <style scoped lang='scss'>
-  @import '../assets/confettione.scss';
+  @import '../../assets/scss/experimentboard.scss';
 </style>
 <script>
+import { toDataURIString } from '@/assets/js/utils.js'
+
 export default {
   name: 'ConfettiOne',
   data(){
@@ -161,6 +264,7 @@ export default {
     };
   },
   methods: {
+    toDataURIString,
     moveCurve1(){
 
       let { curve1 } = this.$refs;
@@ -404,9 +508,9 @@ export default {
 
   },
   mounted(){
-    // this.moveCurve1();
-    // this.animateClipPath();
-    this.confettiMove1();
+    //this.moveCurve1();
+    //this.animateClipPath();
+    //this.confettiMove1();
   }
 }
 </script>
