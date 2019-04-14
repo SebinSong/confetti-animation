@@ -9,6 +9,7 @@
 <script>
 import ConfettiOne from './components/confetti-1/ConfettiOne'
 import ConfettiTwo from './components/confetti-2/ConfettiTwo'
+import ConfettiThree from './components/confetti-3/ConfettiThree'
 import WelcomeMessage from './components/confetti-shared/WelcomeMessage'
 // import ExperimentBoard from './components/experiment/ExperimentBoard'
 // import SvgFilterExperiment from './components/experiment/svgFilterExperiment'
@@ -32,7 +33,8 @@ export default {
   created(){
     this.componentList = { 
       ConfettiOne,
-      ConfettiTwo
+      ConfettiTwo,
+      ConfettiThree
     };
     this.currentComponent = ConfettiOne;
 

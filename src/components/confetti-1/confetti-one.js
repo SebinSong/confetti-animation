@@ -177,7 +177,6 @@ class Confetti {
     this.updateInnerGroup();
     this.updateObjectTransform(index);
   }
-
   updatePosition() {
   
     let tElapse = ( Date.now() - this.tInit );
@@ -188,20 +187,16 @@ class Confetti {
       this.obj.setAttribute('transform', `translate(${this.positionCurr.x},${this.positionCurr.y})`);
     } else return;
   }
-  
   updateInnerGroup() {
     this.innerGY += this.vDown;
     this.objInnerG.setAttribute('transform', `translate(0, ${this.innerGY})`);
   }
-
   scaleDown() {
     this.objScale.setAttribute('transform', 'scale(0.35)');
   }
-  
   removeConfetti() {
     this.parent.removeChild(this.obj);
-  };
-  
+  }
   updateObjectTransform() {
     if(this.flip.tRef === null) this.flip.tRef = Date.now();
   
@@ -239,7 +234,6 @@ class Confetti {
     }
     
   }
-
 }
 
 export function confettiAnimationSettings(svgDom) {
@@ -349,23 +343,23 @@ export function destroyAnimation() {
 
 // EventHandler
 function mouseMoveHandler(e) {
-
   const { currentTarget: target, clientX, clientY } = e;
   const { left, top, height } = target.getBoundingClientRect();
-  // keeps track of the mouse pointer(the Y coordinate is flipped)
-  [ Mouse.x, Mouse.y ] = [ clientX - left, height - (clientY - top)];
 
+  // keeps track of the mouse pointer(the Y coordinate is flipped)
+  Mouse.x = clientX - left;
+  Mouse.y = height - (clientY - top);
   // update Cones' Angles according to the mouse pointer
   redCone.calculate();
   greyCone.calculate();
 }
 
 function touchMoveHandler(e) {
-  const touch = e.changedTouches[0];
-  const { target, clientX, clientY } = touch;
+  const { target, clientX, clientY } = e.changedTouches[0];
   const { left, top, height } = target.getBoundingClientRect();
 
-  [ Mouse.x, Mouse.y ] = [ clientX - left, height - (clientY - top)];
+  Mouse.x = clientX - left;
+  Mouse.y = height - (clientY - top);
   redCone.calculate();
   greyCone.calculate();
 }

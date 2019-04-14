@@ -40,7 +40,6 @@ export default {
     confettiAnimationSettings(this.$refs.svg);
   },
   beforeDestroy(){
-    console.log("destorying confetti-one!");
     destroyAnimation();
   }
 }

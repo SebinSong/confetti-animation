@@ -87,9 +87,7 @@ export function distance(x1, y1, x2, y2) {
   return Math.sqrt(Math.pow(xDist, 2) + Math.pow(yDist, 2))
 }
 
-export function linearScale(domain, range) {
-  // domain, range are both supposed to be an array with the length of 2
-  const [ d1, d2, r1, r2 ] = [ ...domain, ...range ];
+export function linearScale([d1, d2], [r1, r2]) {
   const [ dSpan, rSpan ] = [ d2 - d1, r2 - r1 ];
   return function(value) {
     if(value <= d1) {

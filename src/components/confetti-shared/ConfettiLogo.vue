@@ -7,7 +7,7 @@
       )
     g.inner(stroke="rgb(93,200,240)")
       g.object(stroke="inherit")
-        g.scale(transform="scale(0.5)" stroke="inherit" fill="none")
+        g.scale(transform="scale(0.5)" data-logo="true" stroke="inherit" fill="none")
           use(
             v-for="hook in hooks"
             xlink:href="#hook"

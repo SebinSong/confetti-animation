@@ -41,7 +41,7 @@ export default function ({easeType, initValue, endValue, duration}) {
         if (t < 1) return (endValue - initValue)/2*t*t*t + initValue;
         t -= 2;
         return (endValue - initValue)/2*(t*t*t + 2) + initValue;
-      }
+      };
 
     case 'BounceOut': 
       return t => {
@@ -66,19 +66,19 @@ export default function ({easeType, initValue, endValue, duration}) {
       return t => {
         return (t==0) ? 
           initValue : (endValue - initValue) * Math.pow(2, 10 * (t/duration - 1)) + initValue;
-      }
+      };
     
     case 'BackInOut': 
       return t => {
         let s = 1.70158;
         if((t/=duration/2) < 1) return (endValue - initValue)/2*(t*t*(((s*=(1.525))+1)*t - s)) + initValue;
         return (endValue - initValue)/2*((t-=2)*t*(((s*=(1.525))+1)*t + s) + 2) + initValue;
-      }
+      };
   
     default: // 'Linear'
       return t => {
         return (endValue - initValue)*t/duration + initValue;
-      }
+      };
   }
 
 }

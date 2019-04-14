@@ -22,11 +22,9 @@ export default {
   },
   mounted() {
     // Run the svg animation
-    // $refs.confetti needs to be its DOM Node, not the entire component object
     animateSvg(this.$refs);
   },
   beforeDestroy() {
-    console.log("destorying confetti-two!");
     destroyAnimation();
   }
 }

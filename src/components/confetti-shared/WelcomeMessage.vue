@@ -9,17 +9,23 @@
 <style scoped lang="scss">
 .welcomemessage {
   position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  min-width: 525px; 
-  min-height: 290px;
+  top: 272px; left: 50%;
+  transform: translateX(-50%);
+  min-width: 375px;
+  padding: 0 16px;
 
   display: flex;
   flex-direction: column;
   align-items: center;
   pointer-events: none;
 
-  & > * { pointer-events: auto; }
+  > * { pointer-events: auto; }
+
+  @media screen and (max-width:375px) {
+    min-width: 0;
+    width: 100%;
+    top: 104px;
+  }
 }
 
 .group-pic {
@@ -38,6 +44,11 @@
       weight: black;
     }
     line-height: normal;
+    margin-bottom: 10px;
+
+    @media screen and (max-width:375px) {
+      font-size: 24px;
+    }
   }
   &.text-small {
     font-size: 14px;
