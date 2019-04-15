@@ -16,14 +16,14 @@
 </template>
 
 <script>
-import { animateSvg, destroyAnimation } from './confetti-three.js';
-import confettiParticles from '../confetti-shared/ConfettiParticles.js';
+import { animateSvg, destroyAnimation } from './confetti-three.js'
+import confettiParticles from '../confetti-shared/ConfettiParticles.js'
 import linearGradientGroupincome from '../confetti-shared/LinearGradientGITheme'
-import WelcomeText from './WelcomeText.vue';
+import WelcomeText from './WelcomeText.vue'
 
 export default {
-  name: "ConfettiThree",
-  components: { 
+  name: 'ConfettiThree',
+  components: {
     ...confettiParticles,
     WelcomeText,
     linearGradientGroupincome
@@ -31,17 +31,17 @@ export default {
   props: {
     svgDefaultAttrs: { type: Object }
   },
-  mounted() {
+  mounted () {
     // Run the svg animation
     animateSvg(Object.assign({}, this.$refs, {
       // those two components below have to be passed as DOM Objects
       // instead of vue component objects
       clipPathText: this.$refs.clipPathText.$el,
       clipPathTextMeasure: this.$refs.clipPathTextMeasure.$el
-    }));
+    }))
   },
-  beforeDestroy() {
-    destroyAnimation();
+  beforeDestroy () {
+    destroyAnimation()
   }
 }
 </script>

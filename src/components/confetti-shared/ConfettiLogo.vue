@@ -20,16 +20,16 @@
 <script>
 export default {
   name: 'ConfettiLogo',
-  data(){
+  data () {
     return {
       hooks: [
-        {stroke: "rgb(160,209,14)", tx: 23, ty: -16, rotate: -137, id: 'lightgreen'},
-        {stroke: "rgb(93,200,240)", tx: 2, ty: 2, rotate: -10, id: 'skyblue'},
-        {stroke: "rgb(248,146,1)", tx: -4, ty: -24, rotate: 105, id: 'orange'}
+        { stroke: 'rgb(160,209,14)', tx: 23, ty: -16, rotate: -137, id: 'lightgreen' },
+        { stroke: 'rgb(93,200,240)', tx: 2, ty: 2, rotate: -10, id: 'skyblue' },
+        { stroke: 'rgb(248,146,1)', tx: -4, ty: -24, rotate: 105, id: 'orange' }
       ]
-    };
+    }
   }
-};
+}
 </script>
 
 <style scoped lang="scss">

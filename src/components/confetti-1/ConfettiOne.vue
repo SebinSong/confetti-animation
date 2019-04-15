@@ -17,30 +17,30 @@
   @import '../../assets/scss/confettione.scss';
 </style>
 <script>
-import { confettiAnimationSettings, destroyAnimation } from './confetti-one.js';
-import LinearGradientRed from '../confetti-shared/LinearGradientRed';
-import LinearGradientGrey from '../confetti-shared/LinearGradientGrey';
-import ConfettiParticle from '../confetti-shared/ConfettiLogo';
-import GreyCone from './GreyCone';
-import RedCone from './RedCone';
+import { confettiAnimationSettings, destroyAnimation } from './confetti-one.js'
+import LinearGradientRed from '../confetti-shared/LinearGradientRed'
+import LinearGradientGrey from '../confetti-shared/LinearGradientGrey'
+import ConfettiParticle from '../confetti-shared/ConfettiLogo'
+import GreyCone from './GreyCone'
+import RedCone from './RedCone'
 
 export default {
   name: 'ConfettiAnimation',
   components: {
-    LinearGradientGrey, 
+    LinearGradientGrey,
     LinearGradientRed,
     ConfettiParticle,
-    GreyCone, 
-    RedCone 
-  }, 
+    GreyCone,
+    RedCone
+  },
   props: {
     svgDefaultAttrs: { type: Object }
   },
-  mounted(){
-    confettiAnimationSettings(this.$refs.svg);
+  mounted () {
+    confettiAnimationSettings(this.$refs.svg)
   },
-  beforeDestroy(){
-    destroyAnimation();
+  beforeDestroy () {
+    destroyAnimation()
   }
 }
 </script>

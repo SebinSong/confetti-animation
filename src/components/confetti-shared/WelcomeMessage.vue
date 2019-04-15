@@ -40,7 +40,7 @@
 
   &.text-big {
     font: {
-      size: 32px; 
+      size: 32px;
       weight: black;
     }
     line-height: normal;

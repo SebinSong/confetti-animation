@@ -14,5 +14,5 @@
     <stop offset="90%" stop-color="#fff" />
     <stop offset="90%" stop-color="#B6B5B8" />
     <stop offset="100%" stop-color="#B6B5B8" />
-  </linearGradient> 
+  </linearGradient>
 </template>

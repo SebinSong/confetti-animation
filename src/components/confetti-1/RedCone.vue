@@ -2,7 +2,7 @@
   <g class="cone cone-red">
     <g class="inner">
       <path fill="url(#lg-red)"
-            d="M-30,0 q30,-5 60,-25 v50 q-30,-10 -60,-25 z" 
+            d="M-30,0 q30,-5 60,-25 v50 q-30,-10 -60,-25 z"
       />
       <!--original d="M-30,0 l60,-25 v50 z" -->
       <g class="tails">
@@ -22,4 +22,3 @@
 <script>
 export default { name: 'RedCone' }
 </script>
-

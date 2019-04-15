@@ -2,7 +2,7 @@
   <g class="cone cone-grey">
     <g class="inner">
       <path fill="url(#lg-grey)"
-            d="M-30,0 q30,-5 60,-25 v50 q-30,-10 -60,-25 z" 
+            d="M-30,0 q30,-5 60,-25 v50 q-30,-10 -60,-25 z"
       />
       <g class="tails">
             <path fill="none"
@@ -21,4 +21,3 @@
 <script>
 export default { name: 'GreyCone' }
 </script>
-

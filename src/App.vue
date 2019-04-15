@@ -19,25 +19,24 @@ export default {
   components: {
     WelcomeMessage
   },
-  data(){
+  data () {
     return {
       componentList: null,
       currentComponent: null,
       svgDefaultAttrs: {
-        "xmlns": "http://www.w3.org/2000/svg",
-        "xmlns:xlink": "http://www.w3.org/1999/xlink",
-        "version": '1.1'
+        'xmlns': 'http://www.w3.org/2000/svg',
+        'xmlns:xlink': 'http://www.w3.org/1999/xlink',
+        'version': '1.1'
       }
-    };
+    }
   },
-  created(){
-    this.componentList = { 
+  created () {
+    this.componentList = {
       ConfettiOne,
       ConfettiTwo,
       ConfettiThree
-    };
-    this.currentComponent = ConfettiOne;
-
+    }
+    this.currentComponent = ConfettiOne
   }
 }
 </script>
@@ -67,7 +66,7 @@ export default {
     border-radius: 3px;
     transition: background-color 0.15s linear;
 
-    &:hover { 
+    &:hover {
       background-color: darken($red-primary, 5%);
     }
   }

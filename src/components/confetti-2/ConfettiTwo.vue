@@ -11,21 +11,21 @@
 </template>
 
 <script>
-import { animateSvg, destroyAnimation } from './confetti-two.js';
-import confettiParticles from '../confetti-shared/ConfettiParticles.js';
+import { animateSvg, destroyAnimation } from './confetti-two.js'
+import confettiParticles from '../confetti-shared/ConfettiParticles.js'
 
 export default {
-  name: "ConfettiTwo",
+  name: 'ConfettiTwo',
   components: { ...confettiParticles },
   props: {
     svgDefaultAttrs: { type: Object }
   },
-  mounted() {
+  mounted () {
     // Run the svg animation
-    animateSvg(this.$refs);
+    animateSvg(this.$refs)
   },
-  beforeDestroy() {
-    destroyAnimation();
+  beforeDestroy () {
+    destroyAnimation()
   }
 }
 </script>

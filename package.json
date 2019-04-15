@@ -17,6 +17,11 @@
     "babel-eslint": "^10.0.1",
     "css-loader": "^2.1.0",
     "eslint": "^5.8.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.17.1",
+    "eslint-plugin-node": "^8.0.1",
+    "eslint-plugin-promise": "^4.1.1",
+    "eslint-plugin-standard": "^4.0.0",
     "eslint-plugin-vue": "^5.0.0",
     "node-sass": "^4.11.0",
     "sass-loader": "^7.1.0",
@@ -31,7 +36,7 @@
     },
     "extends": [
       "plugin:vue/essential",
-      "eslint:recommended"
+      "standard"
     ],
     "rules": {},
     "parserOptions": {

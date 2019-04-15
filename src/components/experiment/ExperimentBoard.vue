@@ -37,7 +37,7 @@
             d="M 100,0 L40,100 200,100 150,0 70,140 170,140 z" />
       <path fill-rule="evenodd"
             fill="rgba(180,20,25,0.7)"
-            d="M 100,0 Q 40,100 200,100 150,0 70,140 170,140 100,0 z" 
+            d="M 100,0 Q 40,100 200,100 150,0 70,140 170,140 100,0 z"
       />
 
       <path fill="none"
@@ -47,12 +47,12 @@
             ref="curve1"
       />
 
-      <path ref="trailingPath" 
+      <path ref="trailingPath"
             id="trailingpath"
-            fill="none" 
+            fill="none"
             stroke="rgba(170,20,25,0)"
             stroke-width="4"
-            stroke-dasharray="4,4" 
+            stroke-dasharray="4,4"
             stroke-linecap="round"
              />
 
@@ -68,7 +68,7 @@
        <tspan x="5">r</tspan>
        <tspan x="25">o</tspan>
        <tspan dx="-10">w</tspan>
-       <tspan dy="-30">w</tspan> 
+       <tspan dy="-30">w</tspan>
       </text>
 
       <text x="100" y="400"
@@ -77,7 +77,7 @@
             kerning="20"
             textLength="400"
             lengthAdjust="spacingAndGlyphs"
-      >Jason 
+      >Jason
        <tspan dx="-55" dy="20" font-weight="bold"
               fill="none" stroke="rgba(0,0,0,0.7)">Mraz</tspan>
       </text>
@@ -203,7 +203,7 @@
         <feImage xlink:href="#img1"></feImage>
         <feColorMatrix type="saturate" values="0" result="IMAGE"></feColorMatrix>
       </filter>
-      <rect x="600" y="50" width="300" height="300" fill="rgba(170,20,25,0.7)" stroke="#000" 
+      <rect x="600" y="50" width="300" height="300" fill="rgba(170,20,25,0.7)" stroke="#000"
             filter="url(#texture)"
       />
     </svg>
@@ -231,7 +231,7 @@
       </g>
 
       <path id="track1" ref="track1"
-            fill="none" 
+            fill="none"
             stroke="rgba(0,0,0,0.65)"
             d="M0,700 L350,350"
         />
@@ -254,189 +254,168 @@ import { toDataURIString } from '@/assets/js/utils.js'
 
 export default {
   name: 'ConfettiOne',
-  data(){
+  data () {
     return {
       requestId: null,
       prevPoint: null,
       pointsForPath: [],
 
       confettis: []
-    };
+    }
   },
   methods: {
     toDataURIString,
-    moveCurve1(){
+    moveCurve1 () {
+      let { curve1 } = this.$refs
+      let currCY
+      let vel = { abs: 3, sign: -1 }
 
-      let { curve1 } = this.$refs;
-      let currCY;
-      let vel = { abs: 3, sign: -1 };
-      
-      const [ maxCY, vm ] = [ 300, this ];
+      const [ maxCY, vm ] = [ 300, this ]
 
-      currCY = maxCY;
+      currCY = maxCY
 
-      this.requestId = window.requestAnimationFrame(animateCurve);
+      this.requestId = window.requestAnimationFrame(animateCurve)
 
-      function animateCurve(){
+      function animateCurve () {
+        let newD
 
-        let newD;
-        
-        currCY += 5 * vel.sign;
+        currCY += 5 * vel.sign
 
-        if(Math.abs(currCY) >= maxCY){
-          vel.sign *= -1;
-          currCY = (currCY < 0)? -maxCY : maxCY;
+        if (Math.abs(currCY) >= maxCY) {
+          vel.sign *= -1
+          currCY = (currCY < 0) ? -maxCY : maxCY
         }
 
-        newD = `M50,250 c100,${-currCY} 200,${currCY} 300,0`;
-        curve1.setAttribute('d', newD);
+        newD = `M50,250 c100,${-currCY} 200,${currCY} 300,0`
+        curve1.setAttribute('d', newD)
 
-        vm.requestId = window.requestAnimationFrame(animateCurve);
-      }
-
-      function adjustAbsoluteVelocity(cy){
-        // y = (Ax + 1/velMax)^(-1)
-        const [ velMax, velMin ] = [ 40, 3 ];
-        const A = (velMax - velMin) / (maxCY * velMax * velMin);
-    
-        return 1 / ( A * cy + 1/velMax );
+        vm.requestId = window.requestAnimationFrame(animateCurve)
       }
     },
-    animateClipPath(){
+    animateClipPath () {
+      const { cir1 } = this.$refs
+      let ani = { id: null, vel: 7, sign: 1, xCurr: null }
 
-      const { cir1 } = this.$refs;
-      let ani = { id: null, vel: 7, sign: 1, xCurr: null };
+      ani.xCurr = cir1.getAttribute('cx')
+      if (ani.xCurr <= 400) ani.sign = 1
+      else if (ani.xCurr >= 600) ani.sign = -1
 
-      ani.xCurr = cir1.getAttribute('cx');
-      if(ani.xCurr <= 400) ani.sign = 1;
-      else if(ani.xCurr >= 600) ani.sign = -1;
+      ani.id = window.requestAnimationFrame(moveCircle)
 
-      ani.id = window.requestAnimationFrame(moveCircle);
-
-      function moveCircle(){
-
-        ani.xCurr += ani.vel * ani.sign;
-        if(ani.xCurr <= 400) {
-          ani.xCurr = 400;
-          ani.sign = 1;
-        } 
-        else if(ani.xCurr >= 600) {
-          ani.xCurr = 600;
-          ani.sign = -1;
+      function moveCircle () {
+        ani.xCurr += ani.vel * ani.sign
+        if (ani.xCurr <= 400) {
+          ani.xCurr = 400
+          ani.sign = 1
+        } else if (ani.xCurr >= 600) {
+          ani.xCurr = 600
+          ani.sign = -1
         }
 
-        cir1.setAttribute('cx', ani.xCurr);
+        cir1.setAttribute('cx', ani.xCurr)
 
-        ani.id = window.requestAnimationFrame(moveCircle);
+        ani.id = window.requestAnimationFrame(moveCircle)
       }
     },
-    getDistance(x1, y1, x2, y2){
-      let [ dx, dy ] = [ x2 - x1, y2 - y1 ];
+    getDistance (x1, y1, x2, y2) {
+      let [ dx, dy ] = [ x2 - x1, y2 - y1 ]
 
-      return Math.sqrt(dx*dx + dy*dy);
+      return Math.sqrt(dx * dx + dy * dy)
     },
-    svgMouseMoveHandler({ currentTarget: target, clientX, clientY }){
+    svgMouseMoveHandler ({ currentTarget: target, clientX, clientY }) {
+      const { trailingPath, txtBoard, prev, curr } = this.$refs
+      const { left: boxLeft, top: boxTop } = target.getBoundingClientRect()
+      const [ x, y ] = [ clientX - boxLeft,
+        clientY - boxTop ]
 
-      const { trailingPath, txtBoard, prev, curr } = this.$refs;
-      const { left: boxLeft, top: boxTop } = target.getBoundingClientRect();
-      const [ x, y ] = [ clientX - boxLeft, 
-                        clientY - boxTop ];
-      const vm = this;
-      
-      if(this.prevPoint === null){
-        this.pointsForPath.push({ x, y });
-        this.prevPoint = { x, y };
-        return;
-      }
-      else {
-        let distance = this.getDistance(x, y, this.prevPoint.x, this.prevPoint.y);
+      if (this.prevPoint === null) {
+        this.pointsForPath.push({ x, y })
+        this.prevPoint = { x, y }
+      } else {
+        let distance = this.getDistance(x, y, this.prevPoint.x, this.prevPoint.y)
 
-        prev.setAttribute('cx', this.prevPoint.x);
-        prev.setAttribute('cy', this.prevPoint.y);
-        curr.setAttribute('cx', x);
-        curr.setAttribute('cy', y);
-        
-        if(distance >= 5){
-          let dValue = 'M ', pathLength;
+        prev.setAttribute('cx', this.prevPoint.x)
+        prev.setAttribute('cy', this.prevPoint.y)
+        curr.setAttribute('cx', x)
+        curr.setAttribute('cy', y)
 
-          this.pointsForPath.push({ x, y });
-          this.pointsForPath.slice().reverse().forEach( (p, index) => {
-            dValue += (index === 0)? `${p.x},${p.y} L ` : `${p.x},${p.y} `;
-          });
+        if (distance >= 5) {
+          let dValue = 'M '; let pathLength
 
-          trailingPath.setAttribute('d', dValue);
-          txtBoard.textContent = JSON.stringify(this.pointsForPath);
-          pathLength = trailingPath.getTotalLength();
+          this.pointsForPath.push({ x, y })
+          this.pointsForPath.slice().reverse().forEach((p, index) => {
+            dValue += (index === 0) ? `${p.x},${p.y} L ` : `${p.x},${p.y} `
+          })
 
-          if(pathLength >= 150) this.pointsForPath.splice(0, 1);
+          trailingPath.setAttribute('d', dValue)
+          txtBoard.textContent = JSON.stringify(this.pointsForPath)
+          pathLength = trailingPath.getTotalLength()
 
-          [ this.prevPoint.x, this.prevPoint.y ] = [ x, y ];
-        } 
+          if (pathLength >= 150) this.pointsForPath.splice(0, 1);
 
+          [ this.prevPoint.x, this.prevPoint.y ] = [ x, y ]
+        }
       }
     },
 
     // confetti animation part
-    confettiMove1(){
-
-      let { confetti, confettiWrapper } = this.$refs;
+    confettiMove1 () {
+      let { confettiWrapper } = this.$refs
       const [ track1, track2 ] = [
         { totalLength: this.$refs.track1.getTotalLength(),
           node: this.$refs.track1,
           easeFunc: null
-        }, 
-        { totalLength: this.$refs.track2.getTotalLength(), 
+        },
+        { totalLength: this.$refs.track2.getTotalLength(),
           node: this.$refs.track2,
           easeFunc: null
         }
-      ];
-      let stage = 1, currPoint = { x: null, y: null };
-      let currLength = 0, vel = 4, requestId = null, initTime = null, currTime, timeLimit;
+      ]
+      let stage = 1; let currPoint = { x: null, y: null }
+      let currLength = 0; let initTime = null; let currTime; let timeLimit
 
-      track1.easeFunc = this.quadEaseFactory(0, track1.totalLength, 800);
-      track2.easeFunc = this.quadEaseFactory(0, track2.totalLength, 800);
+      track1.easeFunc = this.quadEaseFactory(0, track1.totalLength, 800)
+      track2.easeFunc = this.quadEaseFactory(0, track2.totalLength, 800)
 
-      initTime = Date.now();
-      timeLimit = 800;
-      requestId = window.requestAnimationFrame(moveConfetti);
+      initTime = Date.now()
+      timeLimit = 800
+      this.requestId = window.requestAnimationFrame(moveConfetti)
 
-      function moveConfetti(timeStamp){
-        currTime = (Date.now() - initTime > timeLimit)? timeLimit : Date.now() - initTime;
-        currLength = (stage === 1)? track1.easeFunc(currTime) : track2.easeFunc(currTime);
+      function moveConfetti (timeStamp) {
+        currTime = (Date.now() - initTime > timeLimit) ? timeLimit : Date.now() - initTime
+        currLength = (stage === 1) ? track1.easeFunc(currTime) : track2.easeFunc(currTime)
 
-        switch(stage){
+        switch (stage) {
+          case 1:
+            if (currLength >= track1.totalLength) currLength = track1.totalLength
+            currPoint = track1.node.getPointAtLength(currLength)
 
-          case 1: 
-            if(currLength >= track1.totalLength) currLength = track1.totalLength;
-            currPoint = track1.node.getPointAtLength(currLength);
-
-            if(currTime === timeLimit){
-              stage++;
-              initTime = Date.now();
-              timeLimit = 800;
+            if (currTime === timeLimit) {
+              stage++
+              initTime = Date.now()
+              timeLimit = 800
             }
-          break;
-          case 2: 
-            if(currLength >= track2.totalLength) currLength = track2.totalLength; 
-            currPoint = track2.node.getPointAtLength(currLength);
+            break
+          case 2:
+            if (currLength >= track2.totalLength) currLength = track2.totalLength
+            currPoint = track2.node.getPointAtLength(currLength)
 
-            if(currTime === timeLimit){
-              stage--;
-              initTime = Date.now();
-              timeLimit = 800;
+            if (currTime === timeLimit) {
+              stage--
+              initTime = Date.now()
+              timeLimit = 800
             }
-          break;
+            break
         }
 
-        confettiWrapper.setAttribute('transform', `translate(${currPoint.x},${currPoint.y})`);
-        requestId = window.requestAnimationFrame(moveConfetti);
+        confettiWrapper.setAttribute('transform', `translate(${currPoint.x},${currPoint.y})`)
+        this.requestId = window.requestAnimationFrame(moveConfetti)
       }
     },
 
-    quadEaseFactory(initValue, endValue, duration){
-
+    quadEaseFactory (initValue, endValue, duration) {
       /* quadratic easeOut
-  	  const A = endValue / duration;
+      const A = endValue / duration;
       return t => A*(2*t - 1/duration*t*t) + initValue;
       */
 
@@ -459,14 +438,14 @@ export default {
       /* Cubic easeIn
       return t => {
         t /= duration;
-	      return (endValue - initValue)*t*t*t + initValue;
+        return (endValue - initValue)*t*t*t + initValue;
       }
       */
 
       /* Cubic easeOut
         t /= duration;
         t--;
-        return (endValue - initValue)*(t*t*t + 1) + initValue;      
+        return (endValue - initValue)*(t*t*t + 1) + initValue;
       */
 
       /* Cubic easeInOut
@@ -488,29 +467,27 @@ export default {
         }
       */
 
-      /* easeOutExpo 
-        return (t==duration) ? 
+      /* easeOutExpo
+        return (t===duration) ?
           endValue : (endValue - initValue) * (-Math.pow(2, -10 * t/duration) + 1) + initValue;
       */
 
       /* easeInExpo
-        return (t==0) ? 
+        return (t===0) ?
           initValue : (endValue - initValue) * Math.pow(2, 10 * (t/duration - 1)) + initValue;
       */
 
       return t => {
-        return (t==duration) ? 
-          endValue : (endValue - initValue) * (-Math.pow(2, -10 * t/duration) + 1) + initValue;
+        return (t === duration)
+          ? endValue : (endValue - initValue) * (-Math.pow(2, -10 * t / duration) + 1) + initValue
       }
-    },
-
-
+    }
 
   },
-  mounted(){
-    //this.moveCurve1();
-    //this.animateClipPath();
-    //this.confettiMove1();
+  mounted () {
+    // this.moveCurve1();
+    // this.animateClipPath();
+    // this.confettiMove1();
   }
 }
 </script>
